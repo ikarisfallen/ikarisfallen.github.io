@@ -38,8 +38,11 @@ main {
     padding: 20px;
 }
 
-.intro, .content {
+/* Adding max-width and centering for content area */
+.content {
     margin-bottom: 20px;
+    max-width: 100%; /* Default to full width */
+    margin: 0 auto;
 }
 
 footer {
@@ -48,6 +51,15 @@ footer {
     text-align: center;
     padding: 10px 0;
 }
+
+table {
+    border-collapse: collapse;
+  }
+
+table td{
+    border:1px solid #b6b6b6;
+    padding: 8px;
+ }
 
 /* Responsive Styles */
 
@@ -84,6 +96,11 @@ footer {
     main {
         padding: 15px;
     }
+
+    /* Limit content width to 75% of the screen */
+    .content {
+        max-width: 75%;
+    }
 }
 
 /* Desktop (901px and up) */
@@ -98,5 +115,10 @@ footer {
 
     main {
         padding: 30px;
+    }
+
+    /* Limit content width to 50% of the screen */
+    .content {
+        max-width: 50%;
     }
 }
