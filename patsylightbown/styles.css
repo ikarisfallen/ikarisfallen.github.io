@@ -38,6 +38,11 @@ main {
     padding: 20px;
 }
 
+h3, h4 {
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
 /* Adding max-width and centering for content area */
 .content {
     margin-bottom: 20px;
