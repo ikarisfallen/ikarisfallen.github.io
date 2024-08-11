@@ -36,7 +36,6 @@
     </style>
 </head>
 <body>
-    <input type="file" id="fileInput" accept=".csv" />
     <button id="generateButton" disabled>Generate Sentence</button>
     <button id="toggleFuriganaButton">Toggle Furigana</button>
     <button id="toggleJapaneseButton">Toggle Japanese Text</button>
@@ -58,18 +57,19 @@
         let furiganaVisible = false; // Furigana is not visible by default
         let japaneseVisible = true; // Japanese text is visible by default
 
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const csvData = e.target.result;
+        // Function to load the CSV file from the URL
+        function loadCSV(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(csvData => {
                     parseCSV(csvData);
                     document.getElementById('generateButton').disabled = false; // Enable button after file is loaded
-                };
-                reader.readAsText(file);
-            }
-        });
+                })
+                .catch(error => console.error('Error loading CSV file:', error));
+        }
+
+        // Automatically load the CSV file from the given URL
+        loadCSV('https://ikarisfallen.github.io/japanese/phrases.csv');
 
         document.getElementById('generateButton').addEventListener('click', generateSentence);
         document.getElementById('revealButton').addEventListener('click', function() {
@@ -100,12 +100,12 @@
         function getRandomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
         }
-        
+
         function generateSentence() {
             var times = parseInt(document.getElementById('times').innerHTML);
             times--;
             document.getElementById('times').innerHTML = times;
-            
+
             const randomNoun1 = getRandomItem(noun1List);
             const randomNoun2 = getRandomItem(noun2List);
             const randomVerb = getRandomItem(verbList);
